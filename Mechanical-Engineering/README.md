@@ -5,3 +5,4 @@
 
 
 https://cad.onshape.com/documents/f2dc20624bd7722bab0f5f80/w/bc5a729af015b2ea9897fdb5/e/b837fdaa083227f75722abd6
+ملاحظة : تم حل الجزء النظري (القوانين) ملف pdf 
