@@ -17,6 +17,8 @@
 
  
  ٢/ملف الكود كامل بلغة البايثون باسم ملف كود مهمه 2 
+
+ 
  ذا رابط يدخل على الكود و النتائج مطبوعه في قوقل كولاب   https://colab.research.google.com/drive/1S_P68wyaYizjSh1-DpDpa4vyDhFAdT0Q
 
  
