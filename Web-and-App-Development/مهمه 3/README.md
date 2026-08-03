@@ -22,11 +22,16 @@ Groq API كنموذج ذكاء اصطناعي
 رابط مشروع للمساعد الصوتي :     https://t-ggg.rf.gd/bot/?i=2
 
 ملفات الحل بتكون 5 وهي : 
-1/ app.js
+1/ app.js 
+
 2/style.Css
+
 3/ ro.php
+
 4/index.html
+
 5/config.php
+
 
 
 المشاكل:
