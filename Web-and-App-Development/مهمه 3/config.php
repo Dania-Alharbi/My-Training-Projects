@@ -3,6 +3,6 @@
 
 <?ph
 
-$apiKey = 'YOUR_API_KEY_HERE';( بيكون داخله مفتاح API)
+$apiKey = ('YOUR_API_KEY_HERE'; "   " ) //مكان الفراغ بيكون = Apl اللي هو كود المفتاح الذي تم نسخه
                                                                                                             
 ?>
