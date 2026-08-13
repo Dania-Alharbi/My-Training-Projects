@@ -26,7 +26,7 @@
 * `get_state.php`: ملف إرجاع الحالة الحالية للروبوت
 * `setup.sql`: كود SQL لإنشاء الجدول وإدخال القيم الابتدائية
 
-* رابط المشروع : يقدر اي بتجربته  http://my-robot-control.infinityfreeapp.com/?i=1
+* رابط المشروع : يقدر اي احد بتجربته  http://my-robot-control.infinityfreeapp.com/?i=1
   
 
 
