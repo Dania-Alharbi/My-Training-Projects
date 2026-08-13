@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التحكم بالروبوت والصوت</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f4f4f9; }
+        .controls { display: grid; grid-template-columns: repeat(3, 80px); gap: 10px; justify-content: center; margin-bottom: 20px; }
+        button { padding: 15px; font-size: 16px; font-weight: bold; cursor: pointer; border-radius: 8px; border: 1px solid #ccc; background: #fff; }
+        button:active { background-color: #ddd; }
+        .mic-btn { background-color: #007bff; color: white; border: none; padding: 15px 30px; font-size: 18px; border-radius: 25px; margin-top: 10px; }
+        .mic-btn.recording { background-color: #dc3545; animation: pulse 1s infinite; }
+        #status { margin-top: 20px; font-weight: bold; color: #333; }
+        #transcript { margin-top: 10px; font-style: italic; color: #555; }
+    </style>
+</head>
+<body>
+
+    <h2>لوحة التحكم بالروبوت</h2>
+
+    <!-- أزرار التحكم اللمسية -->
+    <div class="controls">
+        <div></div>
+        <button onclick="sendCommand('f')">forward</button>
+        <div></div>
+        <button onclick="sendCommand('l')">left</button>
+        <button onclick="sendCommand('s')" style="color: red;">stop</button>
+        <button onclick="sendCommand('r')">right</button>
+        <div></div>
+        <button onclick="sendCommand('b')">backward</button>
+        <div></div>
+    </div>
+
+    <hr style="width: 50%; margin: 30px auto;">
+
+    <!-- زر التحكم الصوتي -->
+    <h3>التحكم الصوتي (Speech to Text)</h3>
+    <button id="micBtn" class="mic-btn" onclick="toggleSpeech()">🎤 اضغط للتحدث</button>
+    <p id="transcript">النص المنطوق سيظهر هنا...</p>
+
+    <div id="status">جاهز للاستخدام</div>
+
+    <script>
+        // دالة إرسال الأمر إلى قاعدة البيانات
+        function sendCommand(cmd) {
+            fetch('update_command.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-length' },
+                body: 'command=' + encodeURIComponent(cmd)
+            })
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('status').innerText = "تم التحديث: " + cmd;
+            })
+            .catch(err => {
+                document.getElementById('status').innerText = "خطأ في الإرسال";
+            });
+        }
+
+        // إعدادات التعرف على الصوت
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition;
+        let isListening = false;
+
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.lang = 'en-US'; // يمكن تغييرها إلى 'ar-SA' للعربية
+            recognition.continuous = false;
+
+            recognition.onstart = function() {
+                isListening = true;
+                document.getElementById('micBtn').classList.add('recording');
+                document.getElementById('micBtn').innerText = "🎙️ جاري الاستماع...";
+            };
+
+            recognition.onresult = function(event) {
+                const text = event.results[0][0].transcript.toLowerCase().trim();
+                document.getElementById('transcript').innerText = 'سمعت: "' + text + '"';
+                
+                // تحويل النص المنطوق إلى أمر
+                if (text.includes('forward') || text.includes('أمام')) sendCommand('f');
+                else if (text.includes('backward') || text.includes('خلف')) sendCommand('b');
+                else if (text.includes('left') || text.includes('يسار')) sendCommand('l');
+                else if (text.includes('right') || text.includes('يمين')) sendCommand('r');
+                else if (text.includes('stop') || text.includes('توقف')) sendCommand('s');
+                else sendCommand(text.charAt(0)); // إرسال أول حرف في حال أردتِ تخزين النص كأمر
+            };
+
+            recognition.onend = function() {
+                isListening = false;
+                document.getElementById('micBtn').classList.remove('recording');
+                document.getElementById('micBtn').innerText = "🎤 اضغط للتحدث";
+            };
+        } else {
+            alert("متصفحك لا يدعم خاصية التعرف على الصوت، يفضل استخدام Chrome");
+        }
+
+        function toggleSpeech() {
+            if (!recognition) return;
+            if (isListening) recognition.stop();
+            else recognition.start();
+        }
+    </script>
+</body>
+</html>
