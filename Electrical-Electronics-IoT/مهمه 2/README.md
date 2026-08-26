@@ -19,7 +19,7 @@
 - يتحرك يمينًا ويسارًا بالتناوب لمدة 60 ثانية
 - عند اكتشاف عائق على مسافة 10 سم أو أقل، تتوقف المحركات ويتم تغيير الاتجاه لتجنب العائق
 
-- رابط مشروع : 
+- رابط مشروع : https://www.tinkercad.com/things/6Bv76uuclxH-brilliant-jaiks-juttuli/editel?returnTo=https%3A%2F%2Fwww.tinkercad.com%2Fdashboard&sharecode=HNROLeIEJSkXvMQ_Ut8NcL0Ag72zYy6vR3HjRWC6Dj4
 
 الأخطاء التي ظهرت:
 
